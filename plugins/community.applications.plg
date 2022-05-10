@@ -1984,6 +1984,7 @@ echo ""
 echo "Adjusting icon for unRaid version"
 if [[ -e /usr/local/emhttp/plugins/dynamix/styles/font-cases.ttf ]]; then sed -i 's/f0db/e942/g' /usr/local/emhttp/plugins/community.applications/Apps.page; fi
 if [[ ! -e /usr/local/emhttp/plugins/dynamix/styles/font-cases.ttf ]]; then sed -i 's/e942/f0db/g' /usr/local/emhttp/plugins/community.applications/Apps.page; fi
+<![CDATA[
 # 替换 GitHub 地址为代理地址
 REPLACE_GITHUBRAW='s#https://raw.githubusercontent.com/#https://ghproxy.com/https://raw.githubusercontent.com/#g'
 REPLACE_GITHUB='s#https://github.com//#https://ghproxy.com/https://github.com/#g'
@@ -1991,6 +1992,7 @@ sed -i $REPLACE_GITHUBRAW /usr/local/emhttp/plugins/community.applications/inclu
 sed -i $REPLACE_GITHUBRAW /usr/local/emhttp/plugins/community.applications/scripts/notices.php
 sed -i $REPLACE_GITHUBRAW /usr/local/emhttp/plugins/community.applications/scripts/updatePluginSupport.php
 sed -i $REPLACE_GITHUB /usr/local/emhttp/plugins/community.applications/skins/Narrow/skin.php
+]]>
 echo ""
 echo "----------------------------------------------------"
 echo " &name; has been installed."
@@ -2011,5 +2013,5 @@ rm -rf &plugdir;
 rm -rf /boot/config/plugins/&name;
 rm -rf /var/lib/docker/unraid/templates-community
 </INLINE>
-</FILE> 
+</FILE>
 </PLUGIN>
