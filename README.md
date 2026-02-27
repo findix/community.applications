@@ -10,7 +10,7 @@ To install this plugin, paste the following URL into the Plugins / Install Plugi
 
 在 插件 / 安装插件 的输入框内粘贴以下地址，然后点击安装：
 
-`https://ghproxy.com/https://raw.githubusercontent.com/findix/community.applications/master/plugins/community.applications.plg`
+`https://gh-proxy.com/https://raw.githubusercontent.com/findix/community.applications/master/plugins/community.applications.plg`
 
 ## 有何优势？
 

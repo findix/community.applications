@@ -1,18 +1,499 @@
 <?xml version='1.0' standalone='yes'?>
 <!DOCTYPE PLUGIN [
 <!ENTITY name      "community.applications">
-<!ENTITY author    "Andrew Zawadzki">
-<!ENTITY version   "2022.05.08">
-<!ENTITY md5       "61ed2e70c65f9984ba8d3d358f6816b2">
+<!ENTITY author    "Lime Technology">
+<!ENTITY version   "2025.10.27">
+<!ENTITY md5       "368247b310ff5ee79e4f3fcd9ae12ce1">
 <!ENTITY launch    "Apps">
 <!ENTITY plugdir   "/usr/local/emhttp/plugins/&name;">
-<!ENTITY github    "Squidly271/community.applications">
-<!ENTITY pluginURL "https://ghproxy.com/https://raw.githubusercontent.com/&github;/master/plugins/&name;.plg">
+<!ENTITY github    "unraid/community.applications">
+<!ENTITY pluginURL "https://gh-proxy.com/https://raw.githubusercontent.com/&github;/master/plugins/&name;.plg">
 ]>
 
-<PLUGIN name="&name;" author="&author;" version="&version;" launch="&launch;" pluginURL="&pluginURL;" min="6.9.0" support="https://lime-technology.com/forums/topic/38582-plug-in-community-applications/" icon="users">
+<PLUGIN name="&name;" author="&author;" version="&version;" launch="&launch;" pluginURL="&pluginURL;" min="6.12.0" support="https://forums.unraid.net/topic/38582-plug-in-community-applications" icon="users">
 
 <CHANGES>
+###2025.10.27
+- Fixed: 7.2+: Certain mobile devices would continually reload the Apps page if their orientation changed.
+- Fixed: Embedded videos wouldn't play
+
+###2025.09.26
+- Fixed: Rebooting would remove any pinned apps
+
+###2025.09.25
+- Fixed: 6.12.x compatibility
+- Fixed: Statistics weren't working with new data storage method
+- Added: Support for a DefaultBranchDescription tag
+
+###2025.09.23
+- Fixed: Complete revamp of search results order to more accurately reflect reality of what is being searched for
+- Chore: Cleanup unused legacy CSS definitions
+- Fixed: Deleting contents of search input would leave the clear search button still visible resulting in oddities under certain circumstances
+- Fixed: If an app had multiple branches defined, if a branch tag was equivalent to the default tag both would appear as an option to select
+- Chore: Remove unused legacy event handlers
+- Added: Pressing ESC will now clear search box and go back to home if a search is in progress and search bar is in focus
+- Added: Search input will remain in focus if searching by pressing enter. After results appear typing can continue without using a mouse click
+- Added: Major optimization for gathering information on installed / previous plugins.
+- Changed: Default now for results per page when browsing or searching is 12 instead of 24
+- Added: Any videos attached to an application will now appear as a thumbnail in the sidebar instead of a button
+- Fixed: Various issues related to the hidden mobile menu if rotating the device
+- Changed: Complete overhaul of the mobile menu bar for coding simplicity
+- Removed: Automatically opening the sidebar if hovering over the application's icon
+- Changed: Reorganization of the buttons and DOM for the searchbar area
+- Fixed: Menu on mobile devices could have the last few items not showing on devices very old (10 years+)
+- Changed: Don't show spinner until after 0.25 second has elapsed on the request
+- Changed: More efficient storage of files.
+- Fixed: Significantly faster browsing or searching
+- Fixed: PHP8 warnings if emergency notifications enabled
+- Changed: Home page now displays 6 applications per section.  Scrollable if they don't have space to fit.
+- Changed: Code which may cause a forced reflow on slower clients resulting in degradaded performance of CA if Unraid Connect was installed
+- Fixed: Better handling of saving the state of CA when leaving the page to handle installing or editing a container
+- Changed: Remove contents of file downloaded from the debugging log
+
+###2025.08.16
+- Fixed: Search bar wouldn't appear without scrolling if font size in Display Settings wasn't set to Normal
+- Fixed: Unable to delete checked off applications from Previous Apps
+- Fixed: Page Navigation would be incorrectly positioned on installed / previous / Action Centre if multiple pages were present and font size wasn't set to Normal
+- Changed: Better hiding / dimming of the main display if sidebar or Statistic, Change Log, etc was being displayed.
+- Tweaked: CSS for mobile devices
+- Changed: Significantly improved CSS for overrides based on OS version, theme used etc.
+- Changed: On results with multiple pages, if there was only a single app on the last page the side bar would open.   Only automatically open the sidebar if there is only a single result on the search
+- Fixed: When installing a plugin, clicking the side bar immediately afterwards would show the flag for updated instead of installed
+- Changed: Always display application icons with a background - Solves the problem of icons that look perfect on the white theme, but on black theme are invisible (black icon with a transparent background).
+- Removed: Option to change page with a mouse gesture or tilting on the middle mouse wheel.  (Left and right arrow keys still work)
+
+###2025.07.22
+- Fixed: Searches active when displaying a special category would result in No Applications Found
+- Fixed: When displaying a special category, clicking Repositories would show No Applications Found
+- Fixed: Potential fatal error in a specific unlikely circumstance on downloads
+- Fixed: Link to dockerHub from docker Hub searches wouldn't work on 6.12.15
+- Changed: CSS definitions for easier theming system
+- Changed: 7.2+ only have back end send number of apps that will fit on home screen (saves CPU cycles especially on low powered devices
+- Added: Max Results per page on searches or browsing of 12
+- Changed: Performance and client memory useage on all clients - most noticeable on mobile or other low powered clients
+- Changed: 7.2+ if using (or probable) mobile device, force maximum results per page when browsing or searching to be maximum 12)
+- Changed: Use modal for initial loading of CA (Updating Content)
+- Changed: 7.2+ if display settings width is set to boxed instead of unlimited, always limit the home page apps to what fits on display instead of what fits on the window size (or previous settings of 12 per section of Home)
+- Changed: Timeouts on downloads
+- Changed: Various coding simplifications and optimizations
+- Changed: Styling of sidebar display
+- Changed: Page navigation always visible
+- Changed: Removal of inline styles on elements (on going WIP)
+- Changed: Search bar always visible (exception: when running Azure / Gray themes on 6.12/7.0/7.1 - this will not be fixed to work on older OS versions with Azure / Gray themes)
+- Added: Popup and ability to abort post calls if they're taking longer than expected
+- Changed: Close cURL channels when switching options on failures
+- Fixed: Disable responsive when running OS versions earlier than 7.2
+- Fixed: HTML syntax / nesting errors on menus
+- Changed: Complete overhaul and simplification of CSS
+- Added: 7.2+: Responsive at resolutions less than 800px (was always responsive greater, with no limitations)
+- Changed: Credits / Statistics use overlay
+- Added: Left / Right Arrow can be used to switch pages when multiple pages are present
+- Fixed: Searches for similar containers (from dockerHub search) wasn't working
+- Fixed: When only a single support option was available and button stated 'Support Forum', a tab would open twice when clicking
+- Fixed: Clicking 'Docker Hub' to get more information was a docker hub search would bypass the external link warning
+- Fixed: Possible to do a search under certain circumstances if the sidebar was open
+- Fixed: Possible for CA to crash at start up under certain very specific and unlikely circumstances
+- Fixed: Possible under certain circumstances for banner saying no more updates to CA running on a deprecated OS version to appear mistakenly
+- Changed: If proxy fails on download, retry without proxy
+
+###2025.06.04a
+- Fixed: Repository searches wouldn't show any results.
+- Changed: CSS tweaks for better responsive experience on mobile devices
+
+###2025.06.04
+- Fixed: Apostrophies within a translation would appear as &amp;apos; instead of '
+
+###2025.06.02
+- Fixed: Crashing if OS language was set to Italian
+
+###2025.05.30
+- Fixed: Crash at startup when using Unraid version 6.12.x
+
+###2025.05.29a
+- Fixed: PHP errors if no apps pinned
+
+###2025.05.29
+- Fixed: PHP8 Warnings
+- Fixed: Under certain circumstances, a plugin not installed could be displayed as installed / update available
+- Fixed: After opening a screenshot or video from sidebar, the main body would be scrollable with the sidebar open
+- Fixed: Back to top arrow would appear with the sidebar open
+- Fixed: Changed default and fallback curl encoding methods for better compatibility
+- Changed: Allow context menus to appear either above or below the button
+- Fixed: CSS issues with Azure / Gray themes when running Unraid 7.1.x
+- Improved: Security system
+- Improved: Performance improvements
+- Removed: Flashing warning symbol on action centre
+- Removed: Ability to dismiss Action Centre enabled banner (automatically removes itself after 10 seconds)
+
+###2025.01.28
+- Added: Ability to disable featured apps
+- Changed: Only show patch plugin within top plugins under certain circumstances
+
+###2025.01.16
+- Fixed: Reversion causing action centre and port in use detection to not work
+
+###2025.01.15
+- Changed: Tailscale fallback state directory environment variable (No ENV will be added unless OS version later than 7.0.0
+- Changed: Permanent fix for extensions interfering with communication
+- Changed: Display author name instead of repository on plugin's cards
+- Changed: Display "Limetech" instead of "Official" on applications directly supported by Lime Technology
+
+###2025.01.12
+- Fixed: NordVPN injecting code into communication JSON in the incorrect format
+
+###2025.01.11
+- Test Fix: Drop extra characters before and after JSON communication (if extensions decide to add information to the POST)
+- Added: Unraid 7.x - If tailscale plugin installed and no /config or /data container mapping add in additional environment variable for a failback tailscale state directory
+
+###2025.01.06
+- Fixed: Issue with internal searches
+- Reverted: Code change that possibly caused issues for some users with malbehaved browser extensions
+
+###2025.01.01
+- Fixed: Prevent h1 tags in sidebar coming via markdown on template overviews
+
+###2024.12.31
+- Fixed: If sidebar never opened after clearing cookies, plugins couldn't be installed from the main screen
+
+###2024.12.20
+- Fixed: Various issues if PHP Warnings were set to be displayed
+- Fixed: Certain v1 templates could not be installed
+- Fixed: Context menu would always appear at bottom of element necessitating a scroll down to view in certain circumstances
+
+###2024.12.16
+- Updated: Magnific Library
+- Fixed: Intellisense issue
+- Added: PHP error log in debugging
+
+###2024.12.15
+- Fixed: PHP8 Warning
+- Added: Threshold for wheel mouse page changes
+- Changed: PHP Warning banner now cannot be dismissed but will autoclose in 15 seconds
+
+###2024.12.14
+- Changed: Relocate GitHub repository to unraid
+- Added: Display TailScale WebUI if present
+- Changed: Rearrange coding
+- Added: In case of fatal PHP error add Cancel button instead of forcing the browser tab to close
+- Changed: Don't display all communication during Something Went Wrong error
+
+###2024.12.05
+- Fixed: cURL encoding fallback issue on certain versions of the OS
+
+###2024.11.29
+- Fixed: Attempting to visit the support forum (or project) where there was only the single option (ie: Card said "Support Forum" instead of "Support" with a dropdown would fail
+- Added: Ability to "whitelist" 3rd party external links
+
+###2024.11.27
+- Fixed: Code unnecessary with Unraid 7.x was being executed
+
+###2024.11.21
+- Fixed: Not all paths referencing default appdata path would be adjusted to match user's configuration
+
+###2024.11.20
+- Fixed: Branch selection
+
+###2024.11.16
+- Added: In the event a plugin after installation didn't clear the "pending" flag, offer the user to clear it when attempting another installation
+- Added: Preserve previous log file for debugging purposes
+- Added: Automatically adjust any template that has a host path pointing to the default appdata path that is not mapped to /config to the current appdata path
+- Fixed: After installation from a search result, upon returning back to Apps, the search results displayed would be random apps
+
+###2024.11.09
+- Fixed: PHP8 warnings under certain circumstances
+- Fixed: Popup blocked warning wouldn't disappear
+- Fixed: Unable to pin a docker container from within Previous Apps
+
+###2024.11.08
+- Security Update
+
+###2024.11.05
+- Added: Most popular plugins section on home page
+- Added: Warning when clicking a link (eg: Project) that is outside of Limetech's control
+
+###2024.10.27
+- Fixed: Under certain circumstances, Action Centre could be enabled with no apps to display
+- Added: Infrastructure changes for future releases
+
+###2024.09.07
+- Added: Infrastructure changes for future releases
+- Removed: Concept of backup server for application feed
+- Fixed: Selecting any option from a support drop down would scroll to top when opening a new browser tab
+- Fixed: Various PHP8 adjustments
+- Fixed: Logout detection from a different browser tab wasn't being recognized in Unraid 6.12/7.0
+
+###2024.07.06
+- Fixed: Display aberrations on cards when application name is very long
+- Fixed: Various PHP8 warnings
+- Added: Infrastructure changes for auto filling templates in certain circumstances
+
+###2024.06.08
+- Fixed: Various PHP8 warnings
+
+###2024.05.03
+- Fixed: curl encoding option of "" no longer works on backup application feed.  Switch to "deflate" as a fallback in case of failure on all downloads
+
+###2024.04.28
+- Fixed: Any corrupted xml files in /boot/config/plugins/dockerMan/templates-user would crash action centre or Installed / Previous Apps
+- Fixed: If template maintainer listed a "branch" tag twice, fatal errors would happen with PHP error settings set to display
+
+###2024.04.06
+- Fixed: Edge case of installing an application where a duplicate template was present and the other template was deprecated could result in CA thinking the deprecated template was installed
+- Fixed: CSS fixes for Branch selection on 6.13+
+- Changed: Support 6.13 proxies.  (Fallback to CA's existing proxy support)
+
+###2024.03.17
+- Fixed: PHP8 errors
+- Fixed: Placement of download log button in settings incorrect in 6.13+
+- Fixed: Apps installed using a different tag than what author specified would appear within Installed Apps with incorrect Action items
+
+###2024.03.10
+- Fixed: DockerHub searches wouldn't use CA's proxy if set
+- Fixed: CSS issues on sidebar
+- Changed: Always use atomic writes
+
+###2024.03.02
+- Fixed: PHP errors (and CSS) when running Azure / Gray themes
+- Fixed: Certain code related to appfeed wasn't running and other code was running twice
+- Fixed: PHP errors in Statistics
+
+###2024.02.10b
+- Handle privately hosted repositories
+
+###2024.02.10
+- Fixed: PHP8 Warning
+
+###2024.02.07
+- Fixed: Unraid Connect (new URL) appearing twice within Apps
+- Changed: Don't display "Read More" on descriptions from dockerHub searches
+- Fixed: Cookies with wrong path being set
+- Fixed: Javascript error on Multi Application Updates (if plugins involved)
+- Changed: Color of card flag if dockerHub search displays an application a template exists for
+- Added: Provisions for a local application feed
+- Changed: Always have debug logs enabled
+- Fixed: Miscellaneous PHP8 warnings
+- Fixed (On supported OS versions): Multi docker installations weren't automatically starting the containers
+
+###2024.01.21
+- Fixed: Templates referencing br0 instead of eth0 (and vice-versa) would tend to show a network type of none when installing.  Automatically adjust templates referencing br0 to instead say eth0 if br0 is not defined
+- Fixed: Action Centre wouldn't get enabled unless updates were available to an app (IE: A deprecated container by itself installed wouldn't trigger AC unless an update to something else was also available)
+- Fixed: Official containers with updates available wouldn't show within Action Centre
+- Added: Popup error if browser fails to communicate with back end running on your server
+- Added: Support CA being able to override the DONE button on docker installs / updates if circumstances warrant (on supported OS versions)
+- Fixed: Miscellaneous PHP8 errors
+- Fixed: Official apps referencing 'library/repository' instead of simply 'repository' would always appear within Previous Apps when installed
+- Changed: Minor optimizations in coding
+
+###2024.01.01
+- Fixed: Inconsistency in popup window for multiple upgrades vs single upgrade via Action Centre
+- Fixed: Statistics, Moderation list etc wasn't having CSS applied
+- Fixed: Multiple upgrades via Action Centre involving containers and plugins wouldn't install upgrade for containers without manually reloading the Apps Tab
+- Fixed: Pinning / Unpinning a language would revert the text for Pin/Unpin to English instead of staying in the applicable language
+- Changed: Roughly 60% lower memory usage
+
+###2023.11.28
+- Fixed: Don't allow donation links for Official containers
+
+###2023.11.25
+- Changed: Minimum requirements for Community Applications now 6.12.0
+- Added: On feed download failure check date and time of server.  If obviously wrong, display message stating to check date and time as this will preclude being able to successfully download the application feed
+- Fixed: Various PHP8 warnings
+- Added: Ability to directly search from within a moderator comment
+- Fixed: Moderator comments (only CA Comments) wouldn't appear within popup if installing the application directly from the card
+- Fixed: Action Centre wouldn't appear if only deprecated / blacklisted apps were present (would only appear if updates were available to an app)
+- Changed: Include link to support thread on failed to download feed
+- Fixed: Orphan containers were being created if selecting multiple application to update within Action Centre
+- Removed: Check for updates button within Installed Applications - Pointless since CA automatically checks if no update check has been performed within the last hour
+- Fixed: Don't enable "Select All" button if there are no checkboxes present within Action Centre on the cards
+- Changed: Ability to override CA's minimum memory requirements
+- Changed: Various CSS 
+- Changed: Don't reload CA between container and plugin updates when doing multiple simultaneous updates
+- Added: Support for 6.13 unlimited width display setting
+- Added: Display a banner if the next revision of CA is incompatible with your OS version, suggesting to upgrade your OS version
+
+###2023.09.30
+- Changed: run update_cron at array_start (fixes issue with OS 6.12.4)
+- Changed: Don't use CA's awesomplete library when running OS 6.13.x+
+- Fixed: Maintainer would appear wrong on certain plugins (eg: Dynamix branded)
+
+###2023.08.27
+- Fixed: Compliance with gui search on settings page
+
+###2023.07.03
+- Added: When requirements not met on a plugin, list the requirements instead of forcing user to go back to sidebar to see what they are
+- Added: Support URL to either image (badge) or website for license in addtion to text
+- Fixed: Search term present in search bar (but not searched) would cause strange results when clicking SHOW MORE from home page
+
+###2023.05.21
+- Fixed: Wrong message appearing on the incompatible section in sidebar
+- Removed: Spotlight Flag in sidebar
+- Added: Better highlighting on card when hovering
+- Fixed: Display aberrations on sidebar on 6.12+ when using Azure or Gray themes
+- Changed: All flag text is now forced uppercase for consistency
+- Fixed: Safari was not resizing flag text correctly
+
+###2023.05.07
+- Added: Ability for authors to override Icon entry based upon theme
+- PHP8 fixes
+- Fixed: After a dockerHub conversion, CA wouldn't return to the proper state of displayed apps
+- Fixed: A spotlighted app that had a description that needed a readmore couldn't easily be expanded to read the entire description on the sidebar
+- Added: Support for magic mouse gesture or mouse wheel left/right to change pages
+- Added: Link to Registry on the support dropdown from the card
+- Regression Error: Action Centre would never show up
+
+###2023.04.26b
+- 6.9.2 Compatibility
+
+###2023.04.26a
+- Regression Error: Handle situation where no changes to display settings have ever taken place
+
+###2023.04.26
+- Fixed: Various Safari issues
+- Fixed: Prevent main area scrolling if sidebar open
+- Fixed: Attempting to install / update a plugin with an invalid .plg would leave pending state always active
+- Fixed: MaxPerPage shouldn't appear on home page
+- Fixed: 404 on application icon on sidebar wouldn't display the default question mark
+- Changed: If Unlimited Width plugin not installed, limit number of non-displayed cards to a more reasonable value
+- Fixed: Under certain circumstances, switching over to backup application feed wouldn't happen
+- Changed: Spotlight icons
+- Added: Popup if attempting to install a plugin while one is already in progress
+- Added: Allow zoom on sidebar application icon
+- Added: Show Installed flag on sidebar
+- Fixed: Under certain circumstances the BACK button on sidebar could disappear
+- Changed: Switch backup application feed to faster server
+- Added: Ability to display Featured Apps
+
+###2023.03.11
+- PHP 8 Upgrades
+
+###2023.03.03
+- PHP8 Upgrades
+
+###2023.02.25
+- PHP8 Upgrades
+
+###2023.02.17
+- Dismissable AC banner warning
+
+###2023.02.16
+- PHP8 Upgrades
+- Added: Treat developer profile pics as a screenshot (click and zoom)
+- Added: ~20% less memory usage if developer mode isn't set in Settings
+- Added: Popup if memory installed does not meet CA's (and the OS's) published minimum
+
+###2023.01.28
+- Fixed: Don't allow dockerHub searches if the initial CYA disclaimer was dismissed
+- Fixed: Exceeded PHP memory limit when displaying template errors in Statistics
+- Fixed: Run on sentences displayed when displaying multiple note on the sidebar
+- Fixed: Privileged warning could appear twice in the sidebar
+- Fixed: Many / most applications would fail to display the correct last updated time in the sidebar
+- Fixed: Setting a favourite repository wouldn't display the hearts until a refresh of the page
+- Updated: Copyright
+- Code Cleanup
+- Updated: PHP8 compliance
+- Maybe fixed: On occasion Home would be highlighted under certain circumstances
+
+###2022.12.29
+- Fixed: Private App Category was not displaying
+- Fixed: First load of Apps after a application feed download would result in system thinking no docker apps installed
+
+###2022.12.28
+- Fixed: PHP8 compliance
+- Changed: Debugging banner enabled now will auto-hide
+- Fixed: v1 only templates were getting an extra invalid entry
+- Added: Better error handling for I/O errors
+- Added: Increase memory limit to 256M
+- Fixed: Prevent possible inifinit loop happening on a background task
+- Fixed: Under certain circumstances possible for CA to think a feed update was downloaded even though it wasn't
+- Fixed: Unraid version in debugging logs could be incorrect
+- Fixed: Feed would redownload every time entering in the apps tab
+- Changed: Always display Maintainer and Repo Name on a plugin's sidebar
+- Fixed: Don't process click events on menu items if onclick attribute present
+- Fixed: On occasion the first click to open a side bar could wind up with an empty sidebar
+- Fixed: Install comments popup could have a display aberration in the text under certain circumstances
+- Changed: More memory usage optimizations
+
+###2022.12.03
+- Fixed: Initial PHP8 compliance
+- Fixed: Don't process menu click events if onclick present
+- Code cleanup
+- Fixed: Infinite loop on sidebar possible in extremely unlikely set of circumstances
+- Changed: Don't redisplay Action Centre enabled banner after installing if it was already enabled
+- Fixed: Display aberration on "Requires" popup when installing from the card if a number was preceded by a space
+- Fixed: Display aberration on Repository cards
+- Fixed: On occasion, side bar would be empty or not populated correctly
+- Fixed: Action Centre would always get enabled if Docker Folder fork was installed
+- Changed: Significantly less memory usage
+
+###2022.11.11
+- Fixed: Loading sidebar on Papermerge twice would exhaust memory
+- Fixed: Uncategorized applications would not appear within "Other" category
+
+###2022.10.16
+- Fixed: Check for updates (via Installed Apps) also checked for OS updates
+- Enhanced: Update plugin support URLs (if necessary) whenever application feed downloaded
+- Fixed: Display issues on 6.11.x when installing a deprecated or incompatible plugin
+- Fixed: Installing deprecated or incompatible application wouldn't enable the Action Centre
+- Added: Relative popularity for plugins (top 45 plugins)
+- Fixed: Multiple line stock comments wouldn't properly translate
+- Added: Language installs / updates now honor the Pending state
+- Changed: Only prepopulate pending plugin installations if there is more than 1 plugin pending (partial OS mitigation)
+- Added: Setting to disable sidebar automatically opening on a hover (defaults to enabled)
+
+###2022.09.30
+- Possible fix for a javascript error in certain unlikely situations
+
+###2022.09.26
+- Performance improvement: Only scan for new private templates when going Home
+- Fixed: Flash drive offline would crash CA
+
+###2022.09.10
+- Tweaked: Various modifications to download timeouts to improve user experience on marginal internet connections
+- Fixed: Don't present edit as an option in the actions dropdown if the xml doesn't actually exist
+- Improved: Revamp debugging information on downloads
+- Changed: Statistics now downloaded asyncronously after an appfeed update instead of first time sidebar opened (Performance improvement)
+- Fixed: CSS changes when running 6.11.0-rc1+
+- Fixed: Action Centre was not being enabled after installing an incompatible application (if settings allowed incompatible installations)
+- Fixed: Action Centre was not being enabled if installing an application deemed to be incompatible via moderation
+- Fixed: Under certain circumstances, an application wouldn't install from the card (only from the sidebar) if extensive use of Requires tag was present
+- Changed: Refined text on Requirements not met messaging
+- Added: Direct CA search links within the reason on Apps of the Month
+- Fixed: Workaround for docker tab still showing updates available after updating all apps within Installed Apps
+
+###2022.07.26
+- Added: Support for Unraid 6.11
+- Fixed: Action Centre would appear if Favourite Repository was clicked
+- Fixed: Drivers couldn't be updated from within Action Centre
+- Fixed: Going to a plugin's settings from within CA would crash CA when hitting DONE on the plugin's settings
+- Fixed: Direct CA search links displayed were not displayed correctly when installing from a card that where a further requirements popup would appear
+- Fixed: Deprecated plugins (Previous Apps Section) couldn't be installed from sidebar
+
+###2022.06.18
+- Fixed: XSS vulnerability on search strings
+- Fixed: Less cookie use
+- Changed: Show Install on card, even if requirements are not met to lessen confusion (show a popup that requirements are not met after clicking)
+- Added: Show banner when background tasks looking for actionable items in action centre are running
+- Fixed: Application cards wouldn't reflect a plugin update being available unless the application feed knew about it
+- Fixed: Fatal flash drive error popup wouldn't appear under any circumstance
+- Fixed: On occasion Action Centre would never appear even if it should have
+- Added: Add check for updates and ability to update all from Installed Apps
+- Fixed: Background check for updates were not checking for language updates
+- Fixed: Clicking on the icon for certain plugins would open, close, and then reopen the sidebar
+- Added: Check for additional requirements not being met if updating a plugin
+- Fixed: Some text never had the ability to be translated
+- Fixed: A previously installed app couldn't be reinstalled from the card if it had multiple line comments included
+- Fixed: Any embedded videos within a profile wouldn't display the proper display video link
+- Added: Hovering over the app's icon or info button for 4 seconds will automatically open the sidebar
+- Added: Handle a specific error that may be made by language translators
+- Changed: Updated flag now takes precedence over Installed
+- Fixed: Disallow an inadvertent search against blacklisted / deprecated / incompatible applications
+- Changed: Automatically scroll to bottom of popup on installs / updates
+- Fixed: Display aberration on the page numberubg
+- Enhanced: Simpler and faster background processing for Action Centre
+
+###2022.05.15
+- Fixed: Action centre would appear even if nothing was present if templates outside of CA's control were installed
+
 ###2022.05.08
 - Added: Action Centre
 - Fixed: Blacklisted Apps wouldn't appear within Installed Apps
@@ -1910,11 +2391,11 @@ THIS IS A REQUIRED UPDATE
   
   if ( version_compare($version['version'],"6.9.0", "<") )
   {
-    echo "********************************************************************\n";
+    echo "**********************************************************************\n";
     echo "\n";
     echo "Community Applications Requires Unraid version 6.9.0 or greater to run\n";
     echo "\n";
-    echo "********************************************************************\n";
+    echo "**********************************************************************\n";
     exit(1);
   }
   echo "Cleaning Up Old Versions\n";
@@ -1925,19 +2406,6 @@ THIS IS A REQUIRED UPDATE
   @unlink("/etc/cron.daily/updateApplications.sh");
 	
 	exec("rm -rf /tmp/ca_notices");
-
-	echo "Fixing pinned apps\n";
-	if ( is_file("/boot/config/plugins/community.applications/pinned_appsV2.json") ) {
-	  $original = json_decode(file_get_contents("/boot/config/plugins/community.applications/pinned_appsV2.json"),true);
-		if ( is_array($original) ) {
-			foreach ($original as $app) {
-				$amp = strpos($app,"&");
-				$new = substr($app,0,$amp).str_replace("-"," ",substr($app,$amp));
-				$pin[$new]=$new;
-			}
-		}
-		file_put_contents("/boot/config/plugins/community.applications/pinned_appsV2.json",json_encode($pin,JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
-	}
 	
 	echo "Setting up cron for background notifications\n";
 	$cron = rand(0,59)." * * * * php /usr/local/emhttp/plugins/community.applications/scripts/notices.php > /dev/null 2>&1";
@@ -1965,7 +2433,7 @@ if [[ -e /tmp/community.applications/tempFiles/templates.json ]]; then rm /tmp/c
 The 'source' file.
 -->
 <FILE Name="/boot/config/plugins/&name;/&name;-&version;-x86_64-1.txz" Run="upgradepkg --install-new --reinstall">
-<URL>https://ghproxy.com/https://raw.githubusercontent.com/&github;/master/archive/&name;-&version;-x86_64-1.txz</URL>
+<URL>https://gh-proxy.com/https://raw.githubusercontent.com/&github;/master/archive/&name;-&version;-x86_64-1.txz</URL>
 <MD5>&md5;</MD5>
 </FILE>
 
@@ -1981,13 +2449,13 @@ mkdir -p /boot/config/plugins/community.applications
 rm -rf /usr/local/emhttp/plugins/community.applications/CA.page
 echo ""
 # Adjust icon depending on unRaid version
-echo "Adjusting icon for unRaid version"
+echo "Adjusting icon for Unraid version"
 if [[ -e /usr/local/emhttp/plugins/dynamix/styles/font-cases.ttf ]]; then sed -i 's/f0db/e942/g' /usr/local/emhttp/plugins/community.applications/Apps.page; fi
 if [[ ! -e /usr/local/emhttp/plugins/dynamix/styles/font-cases.ttf ]]; then sed -i 's/e942/f0db/g' /usr/local/emhttp/plugins/community.applications/Apps.page; fi
 <![CDATA[
 # 替换 GitHub 地址为代理地址
-REPLACE_GITHUBRAW='s#https://raw.githubusercontent.com/#https://ghproxy.com/https://raw.githubusercontent.com/#g'
-REPLACE_GITHUB='s#https://github.com//#https://ghproxy.com/https://github.com/#g'
+REPLACE_GITHUBRAW='s#https://raw.githubusercontent.com/#https://gh-proxy.com/https://raw.githubusercontent.com/#g'
+REPLACE_GITHUB='s#https://github.com//#https://gh-proxy.com/https://github.com/#g'
 sed -i $REPLACE_GITHUBRAW /usr/local/emhttp/plugins/community.applications/include/paths.php
 sed -i $REPLACE_GITHUBRAW /usr/local/emhttp/plugins/community.applications/scripts/notices.php
 sed -i $REPLACE_GITHUBRAW /usr/local/emhttp/plugins/community.applications/scripts/updatePluginSupport.php
@@ -1996,7 +2464,8 @@ sed -i $REPLACE_GITHUB /usr/local/emhttp/plugins/community.applications/skins/Na
 echo ""
 echo "----------------------------------------------------"
 echo " &name; has been installed."
-echo " Copyright 2015-2022, Andrew Zawadzki"
+echo " Copyright 2015-2025, Andrew Zawadzki"
+echo " Copyright 2024-2025, Lime Technology"
 echo " Version: &version;"
 echo "----------------------------------------------------"
 echo ""
@@ -2012,6 +2481,8 @@ removepkg &name;-&version;-x86_64-1
 rm -rf &plugdir;
 rm -rf /boot/config/plugins/&name;
 rm -rf /var/lib/docker/unraid/templates-community
+/usr/local/sbin/update_cron
 </INLINE>
-</FILE>
+</FILE> 
 </PLUGIN>
+
